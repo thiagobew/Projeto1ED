@@ -52,12 +52,27 @@ class MatrixReader {
             return quant;
         };
         void processPoint(Point &point) {
-            // Upgrade
+            DDLinkedList<Point> open_nodes = DDLinkedList<Point>();
+            open_nodes.push_front(point);
+            while (open_nodes.size() > 0) {
+                Point current = open_nodes.pop_front();
+                DDLinkedList<Point> neighbors = getActiveNeighbors(current);
+
+                for (size_t i = 0; i < neighbors.size(); i++) {
+                    Point neighbor = neighbors.pop_front();
+                    if ((!open_nodes.contains(neighbor)) && (!__closed_nodes.contains(neighbor))) {
+                        open_nodes.push_front(neighbor);
+                    }
+                }
+
+                __closed_nodes.push_front(current);
+            }
         };
 
   DDLinkedList<Point> getActiveNeighbors(Point &point) {
     DDLinkedList<Point> lista;
 
+    // Vetor de ponteiros para Point
     Point* side_positions[4];
     side_positions[0]->__row = point.__row + 1;
     side_positions[0]->__column = point.__column;
@@ -69,7 +84,7 @@ class MatrixReader {
     side_positions[4]->__column = point.__column;
 
     for (int i = 0; i < 4; i++) {
-        if (isValidPoint(*side_positions[i]) && isActivePoint(*side_positions[i])) {
+        if (isValidPoint(*side_positions[1]) && isActivePoint(*side_positions[i])) {
             lista.push_back(*side_positions[i]);
         }
     }

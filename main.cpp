@@ -19,6 +19,7 @@ int main(int argc, char const *argv[])
     
     MatrixReader* reader = new MatrixReader(lista);
     lista->clear();
+    cout << reader->getComponentsQuant() << endl;
     delete lista;
     return 0;
 }
