@@ -8,10 +8,10 @@
 namespace structures {
 
     template <typename T>
-    class DoublyLinkedList {
+    class DDLinkedList {
     public:
-        DoublyLinkedList();
-        ~DoublyLinkedList();
+        DDLinkedList();
+        ~DDLinkedList();
         void clear();
 
         void push_back(const T &data);
@@ -86,26 +86,26 @@ namespace structures {
 #endif
 
 template <typename T>
-structures::DoublyLinkedList<T>::DoublyLinkedList() {
+structures::DDLinkedList<T>::DDLinkedList() {
     head = NULL;
     tail = NULL;
     size_ = 0;
 }
 
 template <typename T>
-structures::DoublyLinkedList<T>::~DoublyLinkedList() {
+structures::DDLinkedList<T>::~DDLinkedList() {
     while (!empty()) {
         pop_front();
     }
 }
 
 template <typename T>
-bool structures::DoublyLinkedList<T>::empty() const {
+bool structures::DDLinkedList<T>::empty() const {
     return size_ == 0;
 }
 
 template <typename T>
-void structures::DoublyLinkedList<T>::clear() {
+void structures::DDLinkedList<T>::clear() {
     size_t fixed_size = size_;
 
     for (size_t i = 0; i < fixed_size; i++) {
@@ -114,7 +114,7 @@ void structures::DoublyLinkedList<T>::clear() {
 }
 
 template <typename T>
-void structures::DoublyLinkedList<T>::push_front(const T &data) {
+void structures::DDLinkedList<T>::push_front(const T &data) {
     Node *new_node = new Node(data);
 
     if (new_node == NULL) {
@@ -132,7 +132,7 @@ void structures::DoublyLinkedList<T>::push_front(const T &data) {
 }
 
 template <typename T>
-void structures::DoublyLinkedList<T>::push_back(const T &data) {
+void structures::DDLinkedList<T>::push_back(const T &data) {
     Node *new_node = new Node(data);
 
     if (new_node == NULL) {
@@ -152,7 +152,7 @@ void structures::DoublyLinkedList<T>::push_back(const T &data) {
 }
 
 template <typename T>
-void structures::DoublyLinkedList<T>::insert(const T &data, std::size_t index) {
+void structures::DDLinkedList<T>::insert(const T &data, std::size_t index) {
     if (index > size_) {
         throw std::out_of_range("Index out of range");
     }
@@ -177,7 +177,7 @@ void structures::DoublyLinkedList<T>::insert(const T &data, std::size_t index) {
 }
 
 template <typename T>
-T structures::DoublyLinkedList<T>::pop_front() {
+T structures::DDLinkedList<T>::pop_front() {
     if (head == NULL || empty()) {
         throw std::out_of_range("Index out of range");
     }
@@ -198,7 +198,7 @@ T structures::DoublyLinkedList<T>::pop_front() {
 }
 
 template <typename T>
-T structures::DoublyLinkedList<T>::pop_back() {
+T structures::DDLinkedList<T>::pop_back() {
     if (head == NULL || empty()) {
         throw std::out_of_range("Index out of range");
     }
@@ -220,7 +220,7 @@ T structures::DoublyLinkedList<T>::pop_back() {
 }
 
 template <typename T>
-T structures::DoublyLinkedList<T>::pop(std::size_t index) {
+T structures::DDLinkedList<T>::pop(std::size_t index) {
     if (index > size_ - 1 || index < 0) {
         throw std::out_of_range("Index out of range");
     }
@@ -246,7 +246,7 @@ T structures::DoublyLinkedList<T>::pop(std::size_t index) {
 }
 
 template <typename T>
-void structures::DoublyLinkedList<T>::insert_sorted(const T &data) {
+void structures::DDLinkedList<T>::insert_sorted(const T &data) {
     Node *new_node = new Node(data);
 
     if (new_node == NULL) {
@@ -276,7 +276,7 @@ void structures::DoublyLinkedList<T>::insert_sorted(const T &data) {
 }
 
 template <typename T>
-void structures::DoublyLinkedList<T>::remove(const T &data) {
+void structures::DDLinkedList<T>::remove(const T &data) {
     if (head == NULL) {
         return;
     }
@@ -292,12 +292,12 @@ void structures::DoublyLinkedList<T>::remove(const T &data) {
 }
 
 template <typename T>
-std::size_t structures::DoublyLinkedList<T>::size() const {
+std::size_t structures::DDLinkedList<T>::size() const {
     return size_;
 }
 
 template <typename T>
-std::size_t structures::DoublyLinkedList<T>::find(const T &data) const {
+std::size_t structures::DDLinkedList<T>::find(const T &data) const {
     if (head == NULL) {
         return size_;
     }
@@ -316,12 +316,12 @@ std::size_t structures::DoublyLinkedList<T>::find(const T &data) const {
 }
 
 template <typename T>
-bool structures::DoublyLinkedList<T>::contains(const T &data) const {
+bool structures::DDLinkedList<T>::contains(const T &data) const {
     return find(data) != size_;
 }
 
 template <typename T>
-T &structures::DoublyLinkedList<T>::at(std::size_t index) {
+T &structures::DDLinkedList<T>::at(std::size_t index) {
     if (index > size_) {
         throw std::out_of_range("Index out of range");
     }
