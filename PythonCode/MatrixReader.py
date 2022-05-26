@@ -1,6 +1,3 @@
-from asyncore import read
-
-
 class MatrixReader:
     def __init__(self, matrix: list) -> None:
         self.__matrix = matrix
