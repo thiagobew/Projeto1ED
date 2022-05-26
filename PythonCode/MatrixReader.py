@@ -6,6 +6,7 @@ class MatrixReader:
         self.__active_char = 1
         self.__closed_nodes = []
         self.__componentsQuant = self.__getComponentsQuant()
+        # self.__matrixR = [[0] * self.__columns] * self.__rows
 
     @property
     def componentsQuant(self) -> int:
