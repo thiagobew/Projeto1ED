@@ -154,7 +154,7 @@ void structures::DDLinkedList<T>::push_back(const T &data) {
 template <typename T>
 void structures::DDLinkedList<T>::insert(const T &data, std::size_t index) {
     if (index > size_) {
-        throw std::out_of_range("Index out of range");
+        throw std::out_of_range("Index out of range - Insert");
     }
 
     Node *new_node = new Node(data);
@@ -179,7 +179,7 @@ void structures::DDLinkedList<T>::insert(const T &data, std::size_t index) {
 template <typename T>
 T structures::DDLinkedList<T>::pop_front() {
     if (head == NULL || empty()) {
-        throw std::out_of_range("Index out of range");
+        throw std::out_of_range("Empty List");
     }
 
     T data = head->data();
@@ -200,7 +200,7 @@ T structures::DDLinkedList<T>::pop_front() {
 template <typename T>
 T structures::DDLinkedList<T>::pop_back() {
     if (head == NULL || empty()) {
-        throw std::out_of_range("Index out of range");
+        throw std::out_of_range("Empty List");
     }
 
     Node *last = tail;
@@ -222,7 +222,7 @@ T structures::DDLinkedList<T>::pop_back() {
 template <typename T>
 T structures::DDLinkedList<T>::pop(std::size_t index) {
     if (index > size_ - 1 || index < 0) {
-        throw std::out_of_range("Index out of range");
+        throw std::out_of_range("Index out of range - POP");
     }
 
     if (index == 0) {
@@ -323,7 +323,7 @@ bool structures::DDLinkedList<T>::contains(const T &data) const {
 template <typename T>
 T &structures::DDLinkedList<T>::at(std::size_t index) {
     if (index > size_) {
-        throw std::out_of_range("Index out of range");
+        throw std::out_of_range("Index out of range - AT");
     }
 
     Node *current = head;
