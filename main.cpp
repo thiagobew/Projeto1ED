@@ -1,12 +1,17 @@
 #include "MatrixReader.h"
 #include "dataStructures/LinkedStack.h"
+#include <cstring>
+#include <iostream>
+#include <fstream>
+#include <string>
 using namespace structures;
+using namespace std;
 
-int checkAlinhamento(const char *texto) {
+int checkAlinhamento(char *texto, int length) {
   char *topo;
   int erro = 0;
   LinkedStack<char *> *stack = new LinkedStack<char *>();
-  int length = strlen(texto);
+
 
   for (int i = 0; i < length - 1 && erro == 0; i++) {
     if (texto[i] == '<') {
@@ -19,6 +24,7 @@ int checkAlinhamento(const char *texto) {
       }
 
       stack->push(charWithTag);
+      cout << stack->top() << endl;
     } else if (texto[i] == '<' && texto[i + 1] == '/') {
       if (stack->empty()) {
         erro = 2;
@@ -48,7 +54,41 @@ int checkAlinhamento(const char *texto) {
   return erro;
 }
 
-int main(int argc, char const *argv[]) {
+int main() {
+
+    char xmlfilename[100];
+    fstream newfile;
+
+    // Copyrightstd::cin >> xmlfilename;  // entrada
+    
+    newfile.open("dataset1.xml", ios::in);
+
+    string texto;
+    if (newfile.is_open()) {
+      string line;
+            
+      while(getline(newfile, line)) {
+        texto += line;
+      }
+        
+      newfile.close();
+    }
+
+    char* paraCheckAlinhamento = new char[texto.length()];
+    for (int i = 0; i < texto.length(); i++) {
+      paraCheckAlinhamento[i] = texto[i];
+    }
+
+    int valido = checkAlinhamento(paraCheckAlinhamento, texto.length());
+
+
+    cout << "Erro: " << valido << endl;
+
+    delete paraCheckAlinhamento;
+    return 0;
+}
+
+/* int main(int argc, char const *argv[]) {
   DDLinkedList<DDLinkedList<int> *> *lista =
       new DDLinkedList<DDLinkedList<int> *>();
   DDLinkedList<int> *row1 = new DDLinkedList<int>();
@@ -86,3 +126,4 @@ int main(int argc, char const *argv[]) {
   delete reader;
   return 0;
 }
+ */

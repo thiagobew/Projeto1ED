@@ -1,12 +1,10 @@
-#ifndef STRUCTURES_LINKED_LIST_H
-#define STRUCTURES_LINKED_LIST_H
-
 #include <cstdint>
 #include <stdexcept>
 
 namespace structures {
 
-template <typename T> class LinkedStack {
+template <typename T> 
+class LinkedStack {
 public:
   LinkedStack();
 
@@ -62,28 +60,31 @@ private:
 
 } // namespace structures
 
-#endif
-
-template <typename T> structures::LinkedStack<T>::LinkedStack() {
+template <typename T> 
+structures::LinkedStack<T>::LinkedStack() {
   top_ = nullptr;
   size_ = 0;
 }
 
-template <typename T> structures::LinkedStack<T>::~LinkedStack() { clear(); }
+template <typename T> 
+structures::LinkedStack<T>::~LinkedStack() { clear(); }
 
-template <typename T> void structures::LinkedStack<T>::clear() {
+template <typename T> 
+void structures::LinkedStack<T>::clear() {
   while (!empty()) {
     pop();
   }
 }
 
-template <typename T> void structures::LinkedStack<T>::push(const T &data) {
+template <typename T> 
+void structures::LinkedStack<T>::push(const T &data) {
   Node *newNode = new Node(data, top_);
   top_ = newNode;
   size_++;
 }
 
-template <typename T> T structures::LinkedStack<T>::pop() {
+template <typename T> 
+T structures::LinkedStack<T>::pop() {
   if (empty()) {
     throw std::out_of_range("LinkedStack<>::pop(): stack is empty");
   }
@@ -97,11 +98,13 @@ template <typename T> T structures::LinkedStack<T>::pop() {
   return data;
 }
 
-template <typename T> bool structures::LinkedStack<T>::empty() const {
+template <typename T> 
+bool structures::LinkedStack<T>::empty() const {
   return size_ == 0;
 }
 
-template <typename T> T &structures::LinkedStack<T>::top() const {
+template <typename T> 
+T &structures::LinkedStack<T>::top() const {
   if (empty()) {
     throw std::out_of_range("LinkedStack<>::top(): stack is empty");
   }
@@ -109,6 +112,7 @@ template <typename T> T &structures::LinkedStack<T>::top() const {
   return top_->data();
 }
 
-template <typename T> std::size_t structures::LinkedStack<T>::size() const {
+template <typename T> 
+std::size_t structures::LinkedStack<T>::size() const {
   return size_;
 }
