@@ -47,10 +47,11 @@ int main() {
 
     for (int i = 0; i < quantImages; i++) {
         currentImageText = extractor.extractDataFromTagIgnoringXfirst(texto, "img", i);
-        string currentImageHeightString = extractor.extractDataFromTagIgnoringXfirst(texto, "height", i);
-        currentImageHeight = (int)currentImageHeightString;
 
-        // converter.extractMatrixFromString(currentImageText, currentImageHeight);
+        DDLinkedList<DDLinkedList<int> *> * matriz = converter.extractMatrixFromString(currentImageText);
+        MatrixReader reader = MatrixReader(matriz);
+        int result = reader.getComponentsQuant();
+        cout << "Resultado matriz " << i << ": " << result << endl;
     }
 
     delete inputText;
