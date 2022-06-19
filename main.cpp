@@ -1,5 +1,6 @@
 #include "CheckTags.cpp"
-#include "ExtractData.cpp"
+#include "DataConverter.cpp"
+#include "DataExtractor.cpp"
 
 using namespace structures;
 using namespace std;
@@ -37,9 +38,20 @@ int main() {
         printf("XML inválido!\n");
     }
 
+    // Extrai e Converte os dados
     DataExtractor extractor = DataExtractor();
-    extractor.extractListFromImg(texto);
-    cout << extractor.getStringQuantInText(texto, "<img>") << endl;
+    DataConverter converter = DataConverter();
+    int quantImages = extractor.getStringQuantInText(texto, "<img>");
+    string currentImageText;
+    int currentImageHeight;
+
+    for (int i = 0; i < quantImages; i++) {
+        currentImageText = extractor.extractDataFromTagIgnoringXfirst(texto, "img", i);
+        string currentImageHeightString = extractor.extractDataFromTagIgnoringXfirst(texto, "height", i);
+        currentImageHeight = (int)currentImageHeightString;
+
+        // converter.extractMatrixFromString(currentImageText, currentImageHeight);
+    }
 
     delete inputText;
     return 0;
