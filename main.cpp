@@ -1,4 +1,5 @@
 #include "CheckTags.cpp"
+#include "ExtractData.cpp"
 
 using namespace structures;
 using namespace std;
@@ -8,7 +9,7 @@ int main() {
 
     fstream xlmFile;
     // Copyrightstd::cin >> xmlfilename;  // entrada
-    xlmFile.open("dataset1.xml", ios::in);
+    xlmFile.open("data/dataset1.xml", ios::in);
 
     // Le arquivo xml
     string texto;
@@ -17,7 +18,6 @@ int main() {
         while (getline(xlmFile, line)) {
             texto += line;
         }
-        cout << texto << endl;
         xlmFile.close();
     }
 
@@ -36,6 +36,10 @@ int main() {
         return 0;
         printf("XML inválido!\n");
     }
+
+    DataExtractor extractor = DataExtractor();
+    extractor.extractListFromImg(texto);
+    cout << extractor.getStringQuantInText(texto, "<img>") << endl;
 
     delete inputText;
     return 0;
