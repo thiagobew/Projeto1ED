@@ -55,7 +55,7 @@ int main() {
         DDLinkedList<DDLinkedList<int> *> *matriz;
         matriz = converter.extractMatrixFromString(imageData, imageHeight, imageWidth);
 
-        printf("Matriz\n");
+        /* printf("Matriz\n");
         while (matriz->size() > 0) {
             DDLinkedList<int> *row = matriz->pop_front();
 
@@ -63,13 +63,14 @@ int main() {
                 printf("%d", row->pop_front());
             }
             printf("\n");
-        }
+        } */
 
-        // Segmentation fault in MatrixReader
-        continue;
-        MatrixReader reader = MatrixReader(matriz);
-        int result = reader.getComponentsQuant();
-        cout << "Resultado matriz " << i << ": " << result << endl;
+        MatrixReader *reader = new MatrixReader(matriz);
+        int result = reader->getComponentsQuant();
+        cout << "Quant Componentes da Matrix " << i + 1 << ": " << result << endl;
+
+        delete matriz;
+        delete reader;
     }
 
     delete inputText;

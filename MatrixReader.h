@@ -15,7 +15,6 @@ public:
     };
     ~MatrixReader() {
         __closed_nodes.clear();
-        delete __matrix;
     }
     int getComponentsQuant() {
         return __componentsQuant;
