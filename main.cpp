@@ -9,6 +9,8 @@ using namespace std;
 int main() {
     char xmlfilename[100];
 
+    // Autores: Rafael Sol Vargas, Thiago Augusto Bewiahn
+
     fstream xlmFile;
     cin >> xmlfilename;
     // Copyrightstd::cin >> xmlfilename;  // entrada
