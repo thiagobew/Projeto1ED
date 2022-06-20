@@ -10,7 +10,7 @@ int main() {
 
     fstream xlmFile;
     // Copyrightstd::cin >> xmlfilename;  // entrada
-    xlmFile.open("data/dataset2.xml", ios::in);
+    xlmFile.open("data/dataset01.xml", ios::in);
 
     // Le arquivo xml
     string texto;
