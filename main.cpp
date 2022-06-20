@@ -1,6 +1,6 @@
 #include "CheckTags.cpp"
-#include "DataConverter.cpp"
-#include "DataExtractor.cpp"
+#include "DataConverter.h"
+#include "DataExtractor.h"
 
 using namespace structures;
 using namespace std;
@@ -10,7 +10,7 @@ int main() {
 
     fstream xlmFile;
     // Copyrightstd::cin >> xmlfilename;  // entrada
-    xlmFile.open("data/dataset1.xml", ios::in);
+    xlmFile.open("data/dataset2.xml", ios::in);
 
     // Le arquivo xml
     string texto;
@@ -43,27 +43,15 @@ int main() {
     DataConverter converter = DataConverter();
     string imageData;
     int imageHeight;
-    int imageWidth;
 
     int quantImages = extractor.getStringQuantInText(texto, "<img>");
 
     for (int i = 0; i < quantImages; i++) {
         imageData = extractor.extractDataFromTagIgnoringXfirst(texto, "data", i);
         imageHeight = stoi(extractor.extractDataFromTagIgnoringXfirst(texto, "height", i));
-        imageWidth = stoi(extractor.extractDataFromTagIgnoringXfirst(texto, "width", i));
 
         DDLinkedList<DDLinkedList<int> *> *matriz;
-        matriz = converter.extractMatrixFromString(imageData, imageHeight, imageWidth);
-
-        /* printf("Matriz\n");
-        while (matriz->size() > 0) {
-            DDLinkedList<int> *row = matriz->pop_front();
-
-            while (row->size() > 0) {
-                printf("%d", row->pop_front());
-            }
-            printf("\n");
-        } */
+        matriz = converter.extractMatrixFromString(imageData, imageHeight);
 
         MatrixReader *reader = new MatrixReader(matriz);
         int result = reader->getComponentsQuant();
@@ -77,42 +65,3 @@ int main() {
     return 0;
 }
 
-/* int main(int argc, char const *argv[]) {
-  DDLinkedList<DDLinkedList<int> *> *lista =
-      new DDLinkedList<DDLinkedList<int> *>();
-  DDLinkedList<int> *row1 = new DDLinkedList<int>();
-  DDLinkedList<int> *row2 = new DDLinkedList<int>();
-  DDLinkedList<int> *row3 = new DDLinkedList<int>();
-
-  row1->push_back(1);
-  row1->push_back(0);
-  row1->push_back(1);
-
-  row2->push_back(0);
-  row2->push_back(0);
-  row2->push_back(1);
-
-  row3->push_back(1);
-  row3->push_back(0);
-  row3->push_back(0);
-
-  lista->push_back(row1);
-  lista->push_back(row2);
-  lista->push_back(row3);
-
-  MatrixReader *reader = new MatrixReader(lista);
-  cout << reader->getComponentsQuant() << endl;
-
-  row1->clear();
-  row2->clear();
-  row3->clear();
-  lista->clear();
-
-  // delete row1;
-  // delete row2;
-  // delete row3;
-  // delete lista;
-  delete reader;
-  return 0;
-}
- */

@@ -11,7 +11,7 @@ public:
     ~DataConverter() {
     }
 
-    DDLinkedList<DDLinkedList<int> *> *extractMatrixFromString(string inputText, int numberOfRows, int numberOfColumns) {
+    DDLinkedList<DDLinkedList<int> *> *extractMatrixFromString(string inputText, int numberOfRows) {
         DDLinkedList<DDLinkedList<int> *> *matrix = new DDLinkedList<DDLinkedList<int> *>();
 
         for (int i = 0; i < numberOfRows; i++) {
