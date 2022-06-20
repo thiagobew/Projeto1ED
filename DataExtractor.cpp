@@ -55,6 +55,8 @@ public:
                 outputText[outputText.size() - 1] = inputText[index];
             }
         }
+
+        return outputText;
     }
 
 private:

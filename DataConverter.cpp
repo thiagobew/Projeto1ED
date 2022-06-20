@@ -11,38 +11,26 @@ public:
     ~DataConverter() {
     }
 
-    DDLinkedList<DDLinkedList<int> *> *extractMatrixFromString(string inputText) {
-
+    DDLinkedList<DDLinkedList<int> *> *extractMatrixFromString(string inputText, int numberOfRows, int numberOfColumns) {
         DDLinkedList<DDLinkedList<int> *> *matrix = new DDLinkedList<DDLinkedList<int> *>();
 
-        int numberOfRows = countNumberOfRows(inputText);
-        DDLinkedList<int> *array = new DDLinkedList<int>[numberOfRows];
-        for (int i = 0; i < numberOfRows; i ++) {
-          matrix->push_back(&array[i]);
+        for (int i = 0; i < numberOfRows; i++) {
+            DDLinkedList<int> *row = new DDLinkedList<int>();
+            matrix->push_back(row);
         }
 
-        int rowNumber = 0;
-        for (int i = 0; i < inputText.length(); i++) {
-          cout << inputText[i];
-          if (inputText[i] == ' ') {
-            rowNumber++;
-            continue;
-          }
-
-          matrix->at(rowNumber)->push_back((int)inputText[i]);
+        int dataLen = inputText.length();
+        size_t currentRow = 0;
+        for (size_t i = 1; i < dataLen; i++) { // Começa do 1 pois i == 0 é vazio
+            if (inputText[i] == ' ') {
+                currentRow++;
+                continue;
+            }
+            // Conversão de char para int
+            int value = (int)inputText[i] - 48;
+            matrix->at(currentRow)->push_back(value);
         }
 
         return matrix;
     }
-
-    private:
-      int countNumberOfRows(string inputText) {
-        int count = 0;
-        for (int i = 0; i < inputText.length(); i++) {
-          if (inputText[i] == ' ') {
-            count++;
-          }
-        }
-        return count;
-      }
 };

@@ -41,14 +41,32 @@ int main() {
     // Extrai e Converte os dados
     DataExtractor extractor = DataExtractor();
     DataConverter converter = DataConverter();
+    string imageData;
+    int imageHeight;
+    int imageWidth;
+
     int quantImages = extractor.getStringQuantInText(texto, "<img>");
-    string currentImageText;
-    int currentImageHeight;
 
     for (int i = 0; i < quantImages; i++) {
-        currentImageText = extractor.extractDataFromTagIgnoringXfirst(texto, "img", i);
+        imageData = extractor.extractDataFromTagIgnoringXfirst(texto, "data", i);
+        imageHeight = stoi(extractor.extractDataFromTagIgnoringXfirst(texto, "height", i));
+        imageWidth = stoi(extractor.extractDataFromTagIgnoringXfirst(texto, "width", i));
 
-        DDLinkedList<DDLinkedList<int> *> * matriz = converter.extractMatrixFromString(currentImageText);
+        DDLinkedList<DDLinkedList<int> *> *matriz;
+        matriz = converter.extractMatrixFromString(imageData, imageHeight, imageWidth);
+
+        printf("Matriz\n");
+        while (matriz->size() > 0) {
+            DDLinkedList<int> *row = matriz->pop_front();
+
+            while (row->size() > 0) {
+                printf("%d", row->pop_front());
+            }
+            printf("\n");
+        }
+
+        // Segmentation fault in MatrixReader
+        continue;
         MatrixReader reader = MatrixReader(matriz);
         int result = reader.getComponentsQuant();
         cout << "Resultado matriz " << i << ": " << result << endl;
