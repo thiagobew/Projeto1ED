@@ -55,10 +55,8 @@ int checkAlinhamento(char *texto, int length) {
                 // Testa se a tag bate com a ultima inserida
                 char *topTag = stack->pop();
                 if (strcmp(topTag, closingTag) != 0) {
-                    printf("Tags diferentes %s e %s", topTag, closingTag);
                     erro = 1;
                 }
-                // printf("Fechando Tag: %s\n", closingTag);
             }
         } else if (texto[i] == '<') {
             // Verifica se é uma abertura de tag
@@ -76,12 +74,10 @@ int checkAlinhamento(char *texto, int length) {
             }
             // Extrai a tag para o char criado
             extractWordToChar(texto, i + 1, quantLetters, openingTag);
-            // printf("Abrindo Tag: %s\n", openingTag);
             stack->push(openingTag);
         }
     }
     if (erro == 0 && !stack->empty()) {
-        cout << stack->top() << endl;
         erro = 3;
     }
 

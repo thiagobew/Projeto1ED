@@ -10,11 +10,12 @@ public:
         __matrix = matrix;
         __rows = matrix->size();
         __columns = matrix->at(0)->size();
+        createSecondMatrix();
         __componentsQuant = calculateComponentsQuant();
-        __closed_nodes = DDLinkedList<Point>();
     };
     ~MatrixReader() {
-        __closed_nodes.clear();
+        __m2->clear();
+        delete __m2;
     }
     int getComponentsQuant() {
         return __componentsQuant;
@@ -45,8 +46,8 @@ private:
     int __componentsQuant;
     int __rows;
     int __columns;
-    DDLinkedList<Point> __closed_nodes;
     DDLinkedList<DDLinkedList<int> *> *__matrix;
+    DDLinkedList<DDLinkedList<int> *> *__m2;
 
     int calculateComponentsQuant() {
         int quant = 0;
@@ -54,12 +55,14 @@ private:
             for (size_t j = 0; j < __columns; j++) {
                 Point point = Point(i, j);
                 if (isActivePoint(point)) {
-                    if (!__closed_nodes.contains(point)) {
+                    // Se um ponto não está em closed nodes contará como um novo componente
+                    if (!__m2->at(i)->at(j)) {
                         processPoint(point);
                         quant++;
                     }
                 }
             }
+
         return quant;
     };
 
@@ -72,16 +75,28 @@ private:
             DDLinkedList<Point> neighbors = getActiveNeighbors(current);
 
             for (size_t i = 0; i < neighbors.size(); i++) {
-                Point neighbor = neighbors.pop_front();
+                Point neighbor = neighbors.at(i);
 
-                if ((!open_nodes.contains(neighbor)) && (!__closed_nodes.contains(neighbor))) {
+                if ((!open_nodes.contains(neighbor)) && (!__m2->at(neighbor.__row)->at(neighbor.__column))) {
                     open_nodes.push_front(neighbor);
                 }
             }
 
-            __closed_nodes.push_front(current);
+            __m2->at(current.__row)->at(current.__column) = 1;
         }
     };
+
+    void createSecondMatrix() {
+        __m2 = new DDLinkedList<DDLinkedList<int> *>();
+
+        for (int i = 0; i < __rows; i++) {
+            DDLinkedList<int> *row = new DDLinkedList<int>();
+            for (int j = 0; j < __columns; j++) {
+                row->push_back(0);
+            }
+            __m2->push_back(row);
+        }
+    }
 
     DDLinkedList<Point> getActiveNeighbors(Point &point) {
         DDLinkedList<Point> lista;

@@ -49,7 +49,19 @@
     "xutility": "cpp",
     "array": "cpp",
     "string_view": "cpp",
-    "deque": "cpp"
+    "deque": "cpp",
+    "*.tcc": "cpp",
+    "cstdarg": "cpp",
+    "cwctype": "cpp",
+    "unordered_map": "cpp",
+    "vector": "cpp",
+    "algorithm": "cpp",
+    "functional": "cpp",
+    "memory_resource": "cpp",
+    "numeric": "cpp",
+    "optional": "cpp",
+    "random": "cpp",
+    "sstream": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }

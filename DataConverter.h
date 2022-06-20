@@ -11,7 +11,7 @@ public:
     ~DataConverter() {
     }
 
-    DDLinkedList<DDLinkedList<int> *> *extractMatrixFromString(string inputText, int numberOfRows) {
+    DDLinkedList<DDLinkedList<int> *> *extractMatrixFromString(string inputText, int numberOfRows, int numberOfColumns) {
         DDLinkedList<DDLinkedList<int> *> *matrix = new DDLinkedList<DDLinkedList<int> *>();
 
         for (int i = 0; i < numberOfRows; i++) {
@@ -21,14 +21,11 @@ public:
 
         int dataLen = inputText.length();
         size_t currentRow = 0;
-        for (size_t i = 1; i < dataLen; i++) { // Começa do 1 pois i == 0 é vazio
-            if (inputText[i] == ' ') {
-                currentRow++;
-                continue;
-            }
+        for (size_t i = 0; i < dataLen; i++) {
+            currentRow = i / numberOfColumns;
             // Conversão de char para int
-            int value = (int)inputText[i] - 48;
-            matrix->at(currentRow)->push_back(value);
+            // int value = (int)inputText[i] - 48;
+            matrix->at(currentRow)->push_back((int)inputText[i] - 48);
         }
 
         return matrix;
